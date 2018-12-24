@@ -1,0 +1,24 @@
+<template src="./template.html" />
+<style src="./index.css" />
+<script>
+    import NopastCliTpl from 'nopast-cli-tpl';
+
+    export default {
+        name: "example",
+        components: {
+            'nopast-cli-tpl': NopastCliTpl
+        },
+        data() {
+            return {
+                
+            }
+        },
+        mounted() {
+            
+        },
+        methods: {
+          
+        }
+    }
+</script>
+
