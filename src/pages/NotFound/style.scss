@@ -1,0 +1,27 @@
+div{
+    position: absolute;
+    width: 100%;
+    h1 {
+        font-size: 120px;
+        color: #fec868;
+        span {
+            vertical-align: middle;
+        }
+        .img {
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            background: url(~Assets/images/comical.png) no-repeat;
+            animation: NotFoundComical 6s infinite linear;
+        }
+    }
+    h1, h2 {
+        text-align: center;
+    }
+    .back-to-index {
+        text-align: center;
+        .md-button {
+            color: #fff !important;
+        }
+    }
+}
