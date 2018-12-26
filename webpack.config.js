@@ -15,12 +15,12 @@ threadLoader.warmup({}, [
 ]);
 
 module.exports = {
-    mode: "production",
+    mode: 'production',
     entry: {
-        [pkg.name]: [path.resolve(__dirname, './src/index.js.js')]
+        [pkg.name]: [path.resolve(__dirname, './src/index.js')]
     },
     output: {
-        path: path.resolve(__dirname, "./dist"),
+        path: path.resolve(__dirname, './dist'),
         publicPath: '/dist',
         filename: '[name].js',
         libraryTarget: 'umd',
@@ -29,9 +29,9 @@ module.exports = {
     resolve: {
         modules: [path.resolve(__dirname, './src'), 'node_modules'],
         alias: {
-            Utils: path.resolve(__dirname, "./src/utils"),
-            Services: path.resolve(__dirname, "./src/services"),
-            Icons: path.resolve(__dirname, "./src/icons"),
+            Utils: path.resolve(__dirname, './src/utils'),
+            Services: path.resolve(__dirname, './src/services'),
+            Icons: path.resolve(__dirname, './src/icons'),
         }
     },
     module: {
@@ -39,7 +39,7 @@ module.exports = {
             {
                 test: /\.vue$/,
                 use: [
-                    "thread-loader",
+                    'thread-loader',
                     {
                         loader: 'vue-loader',
                         options: {
@@ -55,9 +55,9 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: [
-                    "thread-loader",
+                    'thread-loader',
                     {
-                        loader: "babel-loader",
+                        loader: 'babel-loader',
                         options: {
                             cacheDirectory: true
                         }
@@ -67,7 +67,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    "thread-loader",
+                    'thread-loader',
                     'style-loader',
                     {
                         loader: 'css-loader',
@@ -80,7 +80,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    "thread-loader",
+                    'thread-loader',
                     'style-loader',
                     {
                         loader: 'css-loader',
@@ -91,19 +91,7 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            outputStyle: "compressed"
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.svg$/,
-                use: [
-                    "thread-loader",
-                    {
-                        loader: 'svg-inline-loader',
-                        options: {
-                            classPrefix: true
+                            outputStyle: 'compressed'
                         }
                     }
                 ]
@@ -111,13 +99,8 @@ module.exports = {
             {
                 test: /\.(png|jpg|gif)$/,
                 use: [
-                    "thread-loader",
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 99999
-                        }
-                    }
+                    'thread-loader',
+                    'url-loader'
                 ]
             }
         ]

@@ -1,6 +1,6 @@
 {
     "name": "nopast-cli-tpl",
-    "version": "2.0.5",
+    "version": "1.0.0",
     "description": "nopast-cli-tpl-description",
     "repository": {
         "type": "git",
@@ -42,7 +42,6 @@
         "node-sass": "^4.7.2",
         "sass-loader": "^7.1.0",
         "style-loader": "^0.23.1",
-        "svg-inline-loader": "^0.8.0",
         "thread-loader": "^1.2.0",
         "url-loader": "^1.1.2",
         "vue": "^2.5.16",

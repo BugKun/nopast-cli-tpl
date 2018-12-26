@@ -2,6 +2,7 @@
     path = require('path'),
     threadLoader = require('thread-loader'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
+    webpackConfig = require('../webpack.config'),
     pkg = require('../package.json');
 
 
@@ -17,26 +18,26 @@ threadLoader.warmup({}, [
 
 
 module.exports = {
-    mode: "development",
+    mode: 'development',
     entry: {
         [pkg.name]: [
             path.resolve(__dirname, './src/index.js'),
-            "webpack-hot-middleware/client?reload=true"
+            'webpack-hot-middleware/client?reload=true'
         ]
     },
     output: {
-        path: path.resolve(__dirname, "./build"),
+        path: path.resolve(__dirname, './build'),
         filename: '[name].js',
         publicPath: '/'
     },
-    devtool: "source-map",
+    devtool: 'source-map',
     resolve: {
         modules: [
             path.resolve(__dirname, './src'),
             'node_modules'
         ],
         alias: {
-            libs: path.resolve(__dirname, "../src/libs"),
+            ...webpackConfig.resolve.alias,
             [pkg.name]: path.join(__dirname, '../src/index.js?hot=true'),
             [`${pkg.name}/src`]: path.join(__dirname, '../src')
         },
@@ -50,7 +51,7 @@ module.exports = {
             {
                 test: /\.vue$/,
                 use: [
-                    "thread-loader",
+                    'thread-loader',
                     {
                         loader: 'vue-loader',
                         options: {
@@ -63,9 +64,9 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: [
-                    "thread-loader",
+                    'thread-loader',
                     {
-                        loader: "babel-loader",
+                        loader: 'babel-loader',
                         options: {
                             cacheDirectory: true
                         }
@@ -75,7 +76,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    "thread-loader",
+                    'thread-loader',
                     'style-loader',
                     {
                         loader: 'css-loader',
@@ -88,7 +89,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    "thread-loader",
+                    'thread-loader',
                     'style-loader',
                     {
                         loader: 'css-loader',
@@ -99,7 +100,7 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            outputStyle: "compressed"
+                            outputStyle: 'compressed'
                         }
                     }
                 ]
@@ -107,7 +108,7 @@ module.exports = {
             {
                 test: /\.svg$/,
                 use: [
-                    "thread-loader",
+                    'thread-loader',
                     {
                         loader: 'svg-inline-loader',
                         options: {
@@ -119,20 +120,15 @@ module.exports = {
             {
                 test: /\.(png|jpg|gif)$/,
                 use: [
-                    "thread-loader",
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 99999
-                        }
-                    }
+                    'thread-loader',
+                    'url-loader'
                 ]
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "./src/index.html"),
+            template: path.resolve(__dirname, './src/index.html'),
             title: `${pkg.name} demo`,
             hash: true
         }),
