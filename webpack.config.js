@@ -17,7 +17,7 @@ threadLoader.warmup({}, [
 module.exports = {
     mode: "production",
     entry: {
-        [pkg.name]: [path.resolve(__dirname, './src/index.js')]
+        [pkg.name]: [path.resolve(__dirname, './src/index.js.js')]
     },
     output: {
         path: path.resolve(__dirname, "./dist"),
@@ -29,9 +29,9 @@ module.exports = {
     resolve: {
         modules: [path.resolve(__dirname, './src'), 'node_modules'],
         alias: {
-            Utils: path.resolve(__dirname, "./src/libs/utils"),
-            Services: path.resolve(__dirname, "./src/libs/services"),
-            Icons: path.resolve(__dirname, "./src/libs/icons"), 
+            Utils: path.resolve(__dirname, "./src/utils"),
+            Services: path.resolve(__dirname, "./src/services"),
+            Icons: path.resolve(__dirname, "./src/icons"),
         }
     },
     module: {
