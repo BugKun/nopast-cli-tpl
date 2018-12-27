@@ -10,15 +10,7 @@ export default (options) =>
                 
                 };
             }
-
-            componentDidMount() {
-                
-            }
-
-            componentWillUnmount() {
-                
-            }
-
+            
             render() {
 
                 return (
