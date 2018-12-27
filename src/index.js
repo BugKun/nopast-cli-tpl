@@ -1,25 +1,29 @@
-import React from 'react'
-import {render} from 'react-dom'
-import {configure} from 'mobx'
-import {Provider} from 'mobx-react'
-import Router from './router'
-import stores from './stores'
-import PageLayout from "./pageLayout"
+import React, {Component} from "react"
+import PropTypes from "prop-types"
+import logoIcon from "Icons/logo.png"
 
-import "./global.scss"
+export default class NopastCliTpl extends Component {
+    constructor(props) {
+        super(props);
 
-configure({
-    enforceActions: 'always'
-});
+        this.state = {
 
-render(
-    <Provider {...stores}>
-        <PageLayout>
-            <Router/>
-        </PageLayout>
-    </Provider>,
-    document.getElementById('app'),
-    () => {
-        window.removeEventListener("error", window.errorHandler);
+        }
     }
-);
+
+    static propTypes = {
+        text: PropTypes.string.isRequired,
+    };
+
+    render() {
+        const {text} = this.props;
+
+        return (
+            <div style={{textAlign: "center"}}>
+                <img src={logoIcon}/>
+                <h1>{text}</h1>
+            </div>
+        )
+    }
+    
+}

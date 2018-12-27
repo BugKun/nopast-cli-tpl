@@ -17,7 +17,8 @@
     },
     "settings": {
         "import/ignore": [
-            "node_modules"
+            "node_modules",
+            "dist"
         ]
     },
     "extends": [
