@@ -1,35 +1,25 @@
-import React, { Component, cloneElement } from "react";
+import React from 'react'
+import {render} from 'react-dom'
+import {configure} from 'mobx'
+import {Provider} from 'mobx-react'
+import Router from './router'
+import stores from './stores'
+import PageLayout from "./pageLayout"
 
-export default (options) =>
-    (WrappedComponent) =>
-        class ElementResize extends Component{
-            constructor(props) {
-                super(props);
+import "./global.scss"
 
-                this.state = {
-                
-                };
-            }
+configure({
+    enforceActions: 'always'
+});
 
-            componentDidMount() {
-                
-            }
-
-            componentWillUnmount() {
-                
-            }
-
-            render() {
-
-                return (
-                    <WrappedComponent 
-                        {...this.props}
-                        style={{
-                            ...this.props.style,
-                            ...options
-                        }}
-                    />
-                )
-
-            }
-        }
+render(
+    <Provider {...stores}>
+        <PageLayout>
+            <Router/>
+        </PageLayout>
+    </Provider>,
+    document.getElementById('app'),
+    () => {
+        window.removeEventListener("error", window.errorHandler);
+    }
+);
