@@ -1,13 +1,13 @@
 {
     "parser": "babel-eslint",
+    "plugins": [
+        "react"
+    ],
     "env": {
         "browser": true,
         "node": true,
         "es6": true
     },
-    "plugins": [
-        "react"
-    ],
     "parserOptions": {
         "ecmaVersion": 2018,
         "sourceType": "module",
@@ -16,6 +16,7 @@
         }
     },
     "extends": [
+        "eslint:recommended",
         "plugin:react/recommended"
     ],
     "rules": {
@@ -34,8 +35,6 @@
         "react/jsx-tag-spacing": "off",
         "react/forbid-prop-types": "off",
         "react/no-array-index-key": "off",
-        "react/no-find-dom-node": "off",
-        "react/no-string-refs": "off",
         "jsx-a11y/no-static-element-interactions": "off",
         "no-alert": "off",
         "no-bitwise": "off"
