@@ -8,14 +8,9 @@ const express = require('express'),
     options = require("../options.js"),
     port = process.env.port || 8081;
 
-if(isWin32) {
-    //启动服务器
-    child_process.exec(`start cmd /c npm run server:dev`);
-}
 
-/**
- * webpack-dev-middleware
- */
+
+/* webpack-dev-middleware */
 const webpack = require('webpack'),
         webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleWare = require("webpack-hot-middleware"),

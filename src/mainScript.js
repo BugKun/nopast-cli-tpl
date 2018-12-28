@@ -8,8 +8,6 @@ import App from './pageLayout'
 Vue.config.productionTip = false;
 
 
-
-
 new Vue({
     el: "#app",
     router,
