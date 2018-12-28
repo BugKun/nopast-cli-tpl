@@ -1,10 +1,10 @@
 {
     "name": "nopast-cli-tpl",
     "version": "1.0.0",
-    "description": "nopast-cli-tpl-description",
+    "description": "nopast-cli-tpl description",
     "main": "index.js",
     "scripts": {
-        "start": "cross-env NODE_ENV=development port=8081 node ./example/server/",
+        "start": "cross-env NODE_ENV=development port=8081 node ./example/server/index.js",
         "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.js -p",
         "lint": "cross-env NODE_ENV=development eslint --ext .js,.jsx ./"
     },
@@ -47,11 +47,9 @@
         "eslint-plugin-import": "^2.13.0",
         "eslint-plugin-jsx-a11y": "^6.0.3",
         "eslint-plugin-react": "^7.9.1",
-        "exenv": "^1.2.2",
         "express": "^4.16.2",
         "html-webpack-plugin": "^3.2.0",
         "node-sass": "^4.7.2",
-        "postcss-scss": "^2.0.0",
         "prop-types": "^15.6.2",
         "react": "^16.3.2",
         "react-dom": "^16.3.2",
