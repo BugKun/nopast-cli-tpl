@@ -9,9 +9,7 @@
 
 
 
-/**
- * webpack-dev-middleware
- */
+/* webpack-dev-middleware */
 const webpack = require("webpack"),
     webpackDevMiddleware = require("webpack-dev-middleware"),
     webpackHotMiddleWare = require("webpack-hot-middleware"),
@@ -26,11 +24,15 @@ const webpack = require("webpack"),
 app.use(devMiddleware);
 app.use(hotMiddleware);
 
+/* 处理 application/x-www-form-urlencoded */
+app.use(bodyParser.urlencoded({extended: false}));
+/* 处理 application/json */
+app.use(bodyParser.json());
 /* 开启GZIP */
 app.use(compress());
 
-// 处理 application/json
-app.use(bodyParser.json());
+
+
 
 
 /* 开启history模式 */
