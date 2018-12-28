@@ -21,6 +21,7 @@
         "vue",
         "component",
         "vue-component",
+        "demo",
         "nopast-cli-tpl"
     ],
     "devDependencies": {
