@@ -1,2 +1,2 @@
 # nopast-cli-tpl
-Vue-Component
+Vue Component
