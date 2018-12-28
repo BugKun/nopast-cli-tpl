@@ -15,11 +15,6 @@
             "jsx": true
         }
     },
-    "settings": {
-        "import/ignore": [
-            "node_modules"
-        ]
-    },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
