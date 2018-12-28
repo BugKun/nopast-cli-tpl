@@ -12,11 +12,6 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "settings": {
-        "import/ignore": [
-            "node_modules"
-        ]
-    },
     "rules": {
         "comma-dangle": "off",
         "global-require": "off",
