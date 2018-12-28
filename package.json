@@ -20,7 +20,9 @@
     "keywords": [
         "react",
         "HOC",
+        "react-HOC",
         "component",
+        "react-component",
         "demo",
         "nopast-cli-tpl"
     ],
