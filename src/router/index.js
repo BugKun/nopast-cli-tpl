@@ -18,7 +18,7 @@ export default class App extends Component {
         return (
             <Router history={history}>
                 <Switch>
-                    <Route exact path="/" component={loadable(() => import(/* webpackChunkName: "home" */ "../pages/"))}/>
+                    <Route exact path="/" component={loadable(() => import(/* webpackChunkName: "index" */ "../pages/"))}/>
                     <Route path="/server" component={loadable(() => import(/* webpackChunkName: "server" */ "../pages/server"))}/>
                     <Route component={() => (<h1>404</h1>)}/>
                 </Switch>
