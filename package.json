@@ -17,6 +17,12 @@
         "url": "https://github.com/BugKun/nopast-cli-tpl/issues"
     },
     "homepage": "https://github.com/BugKun/nopast-cli-tpl",
+    "keywords": [
+        "react",
+        "component",
+        "demo",
+        "nopast-cli-tpl"
+    ],
     "devDependencies": {
         "babel-core": "^6.26.0",
         "babel-eslint": "^8.2.5",
