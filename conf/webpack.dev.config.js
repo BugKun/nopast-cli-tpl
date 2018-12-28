@@ -10,7 +10,7 @@ module.exports = {
     },
     output: {
         ...webpackBaseConfig.output,
-        filename: '[name].[hash:8].js' //输入文件
+        filename: '[name].[hash:8].js'
     },
     resolve: webpackBaseConfig.resolve,
     devtool: "source-map",

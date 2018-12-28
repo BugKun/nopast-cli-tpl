@@ -1,7 +1,4 @@
-﻿/**
- * Created by JOE on 2017/3/16.
- */
-const fs = require('fs'),
+﻿const fs = require('fs'),
     express = require('express'),
     app = express(),
     compress = require("compression"),
@@ -15,32 +12,23 @@ const fs = require('fs'),
 
 
 
-/**
- * 开启GZIP
- */
+/* 处理 application/x-www-form-urlencoded */
+app.use(bodyParser.urlencoded({extended: false}));
+/* 处理 application/json */
+app.use(bodyParser.json());
+/* 开启GZIP */
 app.use(compress());
-/**
- * 处理 application/x-www-form-urlencoded
- */
-app.use(bodyParser.urlencoded({ extended: false }));
-/**
- * 处理 application/json
- */
-app.use(bodyParser());
-/**
- * 阻止窥探服务器构造
- */
+/* 阻止窥探服务器构造 */
 app.disable("x-powered-by");
 
 
 
 app.get("/api/server", require("./services/server"));
-app.use("/api/*", (req, res) => res.json({code: false, msg: "API not found"}));
+app.use("/api/*", (req, res) => res.json({code: false, msg: "API is not found"}));
 
 
-/**
- * 开启history模式
- */
+
+/* 开启history模式 */
 if(isProd){
     /* 挂载静态页面 */
     app.use(express.static(path.join(__dirname, '../static')));
@@ -57,5 +45,6 @@ if(isProd){
 
 
 
-app.listen(port);
-console.log(`Server is now running in localhost:${port}`);
+app.listen(port, () => {
+    console.log(`Server is now running in localhost:${port}`);
+});

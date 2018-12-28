@@ -1,6 +1,7 @@
 ﻿const path = require('path'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
-    threadLoader = require('thread-loader');
+    threadLoader = require('thread-loader'),
+    pkg = require('../package.json');
 
 
 
@@ -104,6 +105,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "../src/index.html"),
+            title: `${pkg.name} demo`,
             minify: {
                 collapseWhitespace: true,
                 removeAttributeQuotes: true,

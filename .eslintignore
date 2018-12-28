@@ -1,3 +1,5 @@
 node_modules/*
+conf/*
 dist/*
-example/dist/*
+server/*
+options.js

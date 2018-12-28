@@ -1,20 +1,15 @@
-﻿/**
- * Created by JOE on 2017/3/16.
- */
-const express = require('express'),
+﻿const express = require('express'),
     app = express(),
     proxy = require('http-proxy-middleware'),
     compress = require("compression"),
+    child_process = require('child_process'),
     path = require('path'),
     options = require("../options.js"),
+    isWin32 = require('os').platform() === 'win32',
     port = process.env.PORT || 8081;
 
 
-
-
-/**
- * webpack-dev-middleware
- */
+/* webpack-dev-middleware */
 const webpack = require('webpack'),
         webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleWare = require("webpack-hot-middleware"),
@@ -28,6 +23,7 @@ const webpack = require('webpack'),
         hotMiddleware = webpackHotMiddleWare(compiler);
     app.use(devMiddleware);
     app.use(hotMiddleware);
+
 
 
 /* 开启GZIP */
@@ -55,5 +51,10 @@ app.use((req, res) => {
 });
 
 
-app.listen(port);
-console.log(`Server is now running in localhost:${port}`);
+app.listen(port, () => {
+    console.log(`Server is now running in localhost:${port}`);
+    /* 自动打开浏览器 */
+    if(isWin32) {
+        child_process.exec(`start http://localhost:${port}`);
+    }
+});

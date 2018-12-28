@@ -13,12 +13,10 @@ module.exports = {
     plugins: [
         ...webpackBaseConfig.plugins,
         new CleanWebpackPlugin(
-            ["build"], {
+            ["build", "assets", "index.html"], {
                 root: path.resolve(__dirname, '../static/'),
-                　　　　　　　　　　 //根目录
                 verbose: true,
-                　　　　　　　　　　 //开启在控制台输出信息
-                dry: false　　　　　　　　　　 //启用删除文件
+                dry: false
             })
     ]
 };
