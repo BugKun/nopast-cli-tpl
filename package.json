@@ -10,7 +10,15 @@
         "server:prod": "cross-env NODE_ENV=production port=80 node ./server",
         "lint": "cross-env NODE_ENV=development eslint --ext .js,.vue ./"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BugKun/nopast-cli-tpl.git"
+    },
     "author": "nopast",
+    "bugs": {
+        "url": "https://github.com/BugKun/nopast-cli-tpl/issues"
+    },
+    "homepage": "https://github.com/BugKun/nopast-cli-tpl",
     "dependencies": {
         "body-parser": "^1.18.3",
         "compression": "^1.7.1",

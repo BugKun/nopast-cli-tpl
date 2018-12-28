@@ -18,6 +18,11 @@ export default new VueRouter({
             path: '/',
             component: () =>
                 import (/* webpackChunkName: "index" */ '../pages/index.vue')
+        },
+        {
+            path: '/server',
+            component: () =>
+                import (/* webpackChunkName: "server" */ '../pages/server/index.vue')
         }
     ]
 });

@@ -3,10 +3,10 @@ import axios from 'axios'
 const apiCreate = (ajaxinstance) => {
     const api = {}
 
-    api.getPermission = () => {
+    api.getServer = () => {
         return ajaxinstance({
             method: 'GET',
-            url: `/api/permission`
+            url: `/api/server`
         })
     }
 

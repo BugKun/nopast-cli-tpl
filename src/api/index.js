@@ -23,6 +23,13 @@ ajaxinstance
                 alert(data.msg.text)
             }
         }
+
+        if(data.msg.isLogin === false) {
+            Cookies.remove('winduser');
+            let curUrl = window.location.pathname + window.location.search;
+            window.location.href = `/login?referer=${encodeURIComponent(curUrl)}`
+        }
+
         return data
     }, (error) => {
         return Promise.reject(error)

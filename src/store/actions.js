@@ -3,7 +3,7 @@ import API from "API";
 
 export default {
     initAuth({ commit }) {
-        API.getPermission()
+        API.getServer()
             .then(res => {
                 if (res.success) {
                     commit("changeServerState", res.data.isActive);

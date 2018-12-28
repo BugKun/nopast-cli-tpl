@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-/* 获取当前权限 */
-app.get("/api/permission", require("./services/permission.js"));
+/* 获取当前服务器状态 */
+app.get("/api/server", require("./services/server.js"));
 
 
 /* 挂载静态页面 */
