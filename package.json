@@ -8,8 +8,19 @@
         "build": "cross-env NODE_ENV=production webpack --config webpack.config.js -p",
         "lint": "cross-env NODE_ENV=development eslint ."
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BugKun/nopast-cli-tpl.git"
+    },
     "author": "nopast",
+    "bugs": {
+        "url": "https://github.com/BugKun/nopast-cli-tpl/issues"
+    },
+    "homepage": "https://github.com/BugKun/nopast-cli-tpl",
     "keywords": [
+        "react",
+        "HOC",
+        "component",
         "nopast-cli-tpl"
     ],
     "devDependencies": {
