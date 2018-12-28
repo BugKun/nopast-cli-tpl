@@ -25,9 +25,9 @@ export default class Server extends Component {
 
         return (
             <div className="server">
-                <h4>/server</h4>
+                <h4>router: /server</h4>
                 <h4>server state: {(ServerStore.serverActive)? "online" : "offline"}</h4>
-                <Link to="/home">Go to /home</Link>
+                <Link to="/">Go to /</Link>
             </div>
         )
     }

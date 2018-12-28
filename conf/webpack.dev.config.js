@@ -1,5 +1,6 @@
-﻿const webpack = require('webpack'),
-    webpackBaseConfig = require('./webpack.base.config.js');
+﻿const path = require('path'),
+    webpack = require('webpack'),
+    webpackBaseConfig = require('./webpack.base.config');
 
 
 module.exports = {
@@ -12,7 +13,13 @@ module.exports = {
         ...webpackBaseConfig.output,
         filename: '[name].[hash:8].js'
     },
-    resolve: webpackBaseConfig.resolve,
+    resolve: {
+        ...webpackBaseConfig.resolve,
+        alias: {
+            ...webpackBaseConfig.resolve.alias,
+            Config: path.resolve(__dirname, "../config/dev")
+        }
+    },
     devtool: "source-map",
     module: webpackBaseConfig.module,
     optimization: webpackBaseConfig.optimization,

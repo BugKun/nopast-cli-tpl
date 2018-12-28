@@ -7,7 +7,13 @@ module.exports = {
     mode: "production",
     entry: webpackBaseConfig.entry,
     output: webpackBaseConfig.output,
-    resolve: webpackBaseConfig.resolve,
+    resolve: {
+        ...webpackBaseConfig.resolve,
+        alias: {
+            ...webpackBaseConfig.resolve.alias,
+            Config: path.resolve(__dirname, "../config/prod")
+        }
+    },
     module: webpackBaseConfig.module,
     optimization: webpackBaseConfig.optimization,
     plugins: [

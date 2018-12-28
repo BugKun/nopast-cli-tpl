@@ -1,11 +1,12 @@
 import axios from 'axios'
 import server from "./server"
 import Cookies from "js-cookie"
+import Config from "Config"
 
 
 // 实例化 ajax请求对象
 const ajaxinstance = axios.create({
-    //baseURL: Config.apiBaseUrl,
+    baseURL: Config.baseURL,
     timeout: 10000,
     headers: {
         responseType: 'json',
