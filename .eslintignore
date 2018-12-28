@@ -1,1 +1,3 @@
 node_modules/*
+example/server/*
+example/webpack.babel.config.js

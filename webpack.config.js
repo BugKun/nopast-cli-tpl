@@ -10,7 +10,6 @@ threadLoader.warmup({}, [
     'style-loader',
     'sass-loader',
     'css-loader',
-    'svg-inline-loader',
     'url-loader'
 ]);
 
@@ -25,6 +24,14 @@ module.exports = {
         filename: '[name].js',
         libraryTarget: 'umd',
         library: '[name]'
+    },
+    externals: {
+        'vue': {
+            root: 'Vue',
+            commonjs: 'vue',
+            commonjs2: 'vue',
+            amd: 'vue'
+        }
     },
     resolve: {
         modules: [path.resolve(__dirname, './src'), 'node_modules'],
@@ -97,7 +104,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpg|gif)$/,
+                test: /\.(png|jpg|gif|svg)$/,
                 use: [
                     'thread-loader',
                     'url-loader'

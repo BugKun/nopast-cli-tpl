@@ -4,13 +4,12 @@
     express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
-    compress = require("compression");
+    compress = require("compression"),
+    isWin32 = require('os').platform() === 'win32';
 
 
 
-/**
- * webpack-dev-middleware
- */
+/* webpack-dev-middleware */
 const webpack = require("webpack"),
     webpackDevMiddleware = require("webpack-dev-middleware"),
     webpackHotMiddleWare = require("webpack-hot-middleware"),
@@ -25,11 +24,14 @@ const webpack = require("webpack"),
 app.use(devMiddleware);
 app.use(hotMiddleware);
 
+
+
+/* 处理 application/x-www-form-urlencoded */
+app.use(bodyParser.urlencoded({extended: false}));
+/* 处理 application/json */
+app.use(bodyParser.json());
 /* 开启GZIP */
 app.use(compress());
-
-// 处理 application/json
-app.use(bodyParser.json());
 
 
 /* 开启history模式 */
@@ -47,5 +49,7 @@ app.use((req, res) => {
 
 app.listen(port, () => {
     console.log(`Server is now running in localhost:${port}`);
-    child_process.exec(`start http://localhost:${port}`);
+    if(isWin32) {
+        child_process.exec(`start http://localhost:${port}`);
+    }
 });

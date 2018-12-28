@@ -6,7 +6,7 @@
         "type": "git",
         "url": "git+https://github.com/BugKun/nopast-cli-tpl.git"
     },
-    "author": "nopast-cli-author",
+    "author": "nopast",
     "bugs": {
         "url": "https://github.com/BugKun/nopast-cli-tpl/issues"
     },
@@ -18,6 +18,9 @@
         "lint": "cross-env NODE_ENV=development eslint --ext .js,.vue ./"
     },
     "keywords": [
+        "vue",
+        "component",
+        "vue-component",
         "nopast-cli-tpl"
     ],
     "devDependencies": {
