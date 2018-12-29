@@ -1,13 +1,12 @@
 ﻿import "babel-polyfill";
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from "prop-types";
-import withStyle from "nopast-cli-tpl";
+import NopastCliTpl from "react-nopast-cli-tpl";
 import "./index.scss";
 import logoIcon from "Images/logo.png";
 
 
-@withStyle({
+@NopastCliTpl({
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
