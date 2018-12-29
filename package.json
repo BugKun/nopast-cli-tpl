@@ -11,7 +11,7 @@
         "url": "https://github.com/BugKun/nopast-cli-tpl/issues"
     },
     "homepage": "https://github.com/BugKun/nopast-cli-tpl",
-    "main": "./index.js",
+    "main": "index.js",
     "scripts": {
         "start": "cross-env NODE_ENV=development port=8081 node ./example/server/",
         "build": "cross-env NODE_ENV=production webpack --config ./webpack.config -p",

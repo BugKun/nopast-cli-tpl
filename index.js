@@ -1,2 +1,2 @@
-import pkg from "./dist/nopast-cli-tpl"
-export default pkg
+import component from "./dist"
+export default component
