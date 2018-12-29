@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 
 /* 获取当前服务器状态 */
 app.get("/api/server", require("./services/server.js"));
-
+app.use("/api/*", (req, res) => res.json({code: false, msg: "API is not found"}));
 
 /* 挂载静态页面 */
 app.use(express.static(path.join(__dirname, '../static')));
