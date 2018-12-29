@@ -1,2 +1,2 @@
-import NopastCliTpl from "./dist"
-export default NopastCliTpl
+import HOC from "./dist"
+export default HOC
