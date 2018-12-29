@@ -1,7 +1,7 @@
 <template src="./template.html" />
 <style src="./index.css" />
 <script>
-    import NopastCliTpl from 'nopast-cli-tpl';
+    import NopastCliTpl from 'vue-nopast-cli-tpl';
 
     export default {
         name: "example",
