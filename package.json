@@ -1,7 +1,7 @@
 {
-    "name": "nopast-cli-tpl",
+    "name": "Vue-nopast-cli-tpl",
     "version": "1.0.0",
-    "description": "nopast-cli-tpl-description",
+    "description": "nopast-cli-tpl description",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/BugKun/nopast-cli-tpl.git"
@@ -21,7 +21,6 @@
         "vue",
         "component",
         "vue-component",
-        "demo",
         "nopast-cli-tpl"
     ],
     "devDependencies": {
