@@ -2,11 +2,13 @@
     "name": "nopast-cli-tpl",
     "version": "1.0.0",
     "description": "nopast-cli-tpl description",
-    "main": "index.js",
     "scripts": {
-        "start": "cross-env NODE_ENV=development port=8081 node ./example/server/index.js",
-        "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.js -p",
-        "lint": "cross-env NODE_ENV=development eslint --ext .js,.jsx ./"
+        "start": "cross-env NODE_ENV=development port=8081 node ./conf/webpack.server.js",
+        "build": "cross-env NODE_ENV=production webpack --config conf/webpack.prod.config.js -p",
+        "server": "cross-env NODE_ENV=production port=80 node ./server",
+        "server:dev": "cross-env NODE_ENV=development port=3075 node ./server",
+        "server:prod": "cross-env NODE_ENV=production port=80 node ./server",
+        "lint": "cross-env NODE_ENV=development eslint --ext .js,.vue ./"
     },
     "repository": {
         "type": "git",
