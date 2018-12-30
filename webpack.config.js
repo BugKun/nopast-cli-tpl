@@ -1,5 +1,8 @@
 ﻿const path = require('path'),
     threadLoader = require('thread-loader'),
+    VueLoaderPlugin = require('vue-loader/lib/plugin'),
+    MiniCssExtractPlugin = require("mini-css-extract-plugin"),
+    CleanWebpackPlugin = require('clean-webpack-plugin'),
     pkg = require('./package.json');
 
 
@@ -60,7 +63,10 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: file => (
+                    /node_modules/.test(file) &&
+                    !/\.vue\.js/.test(file)
+                ),
                 use: [
                     'thread-loader',
                     {
@@ -74,8 +80,8 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
+                    MiniCssExtractPlugin.loader,
                     'thread-loader',
-                    'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -87,7 +93,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    'thread-loader',
+                    MiniCssExtractPlugin.loader,
                     'style-loader',
                     {
                         loader: 'css-loader',
@@ -111,5 +117,19 @@ module.exports = {
                 ]
             }
         ]
-    }
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "[name].css"
+        }),
+        new CleanWebpackPlugin(
+            ["dist"],
+            {
+                root: __dirname,
+                verbose: true,
+                dry: false
+            }
+        ),
+        new VueLoaderPlugin()
+    ]
 };

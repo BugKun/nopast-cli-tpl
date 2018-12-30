@@ -1,6 +1,7 @@
 ﻿const webpack = require('webpack'),
     path = require('path'),
     threadLoader = require('thread-loader'),
+    VueLoaderPlugin = require('vue-loader/lib/plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     webpackConfig = require('../webpack.config'),
     pkg = require('../package.json');
@@ -9,10 +10,9 @@
 threadLoader.warmup({}, [
     'vue-loader',
     'babel-loader',
-    'style-loader',
+    'vue-style-loader',
     'sass-loader',
     'css-loader',
-    'svg-inline-loader',
     'url-loader'
 ]);
 
@@ -62,7 +62,10 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: file => (
+                    /node_modules/.test(file) &&
+                    !/\.vue\.js/.test(file)
+                ),
                 use: [
                     'thread-loader',
                     {
@@ -77,7 +80,7 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'thread-loader',
-                    'style-loader',
+                    'vue-style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -90,7 +93,7 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     'thread-loader',
-                    'style-loader',
+                    'vue-style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -106,19 +109,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.svg$/,
-                use: [
-                    'thread-loader',
-                    {
-                        loader: 'svg-inline-loader',
-                        options: {
-                            classPrefix: true
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.(png|jpg|gif)$/,
+                test: /\.(png|jpg|gif|svg)$/,
                 use: [
                     'thread-loader',
                     'url-loader'
@@ -132,6 +123,7 @@ module.exports = {
             title: `${pkg.name} demo`,
             hash: true
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new VueLoaderPlugin()
     ]
 };
