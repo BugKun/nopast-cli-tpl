@@ -1,14 +1,21 @@
 ﻿const webpack = require('webpack'),
     path = require('path'),
+    VueLoaderPlugin = require('vue-loader/lib/plugin'),
+    MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     threadLoader = require('thread-loader'),
+    isProd = process.env.NODE_ENV === 'production',
+    isDev = !isProd,
     pkg = require('../package.json');
 
+    console.log([MiniCssExtractPlugin.loader]);
 
 threadLoader.warmup({}, [
-    'style-loader',
-    'sass-loader',
+    'vue-loader',
     'babel-loader',
+    'vue-style-loader',
+    'sass-loader',
+    'css-loader',
     'file-loader'
 ]);
       
@@ -21,7 +28,7 @@ module.exports = {
     }, 
     output: {
         path: path.resolve(__dirname, '../static'), 
-        filename: 'build/[name].[chunkhash:6].js', 
+        filename: 'build/js/[name].[chunkhash:6].js', 
         publicPath: '/'
     },
     resolve: {
@@ -46,9 +53,6 @@ module.exports = {
                     {
                         loader: 'vue-loader',
                         options: {
-                            cssModules: {
-                                minimize: true
-                            },
                             threadMode: true
                         }
                     }
@@ -57,42 +61,41 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
+                    (isProd) && MiniCssExtractPlugin.loader,
                     'thread-loader',
-                    'style-loader',
-                    { 
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true 
-                        } 
-                    }
-                ]
+                    (isDev) && 'vue-style-loader',
+                    'css-loader'
+                ].filter(item => typeof item !== "boolean")
             },
             {
                 test: /\.scss$/,
                 use: [
+                    (isProd) && MiniCssExtractPlugin.loader,
                     'thread-loader',
-                    'style-loader',
-                    { 
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true 
-                        } 
-                    },
+                    (isDev) && 'vue-style-loader',
+                    'css-loader',
                     {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: true,
-                            outputStyle: 'compressed'
+                            sourceMap: isDev
                         }
                     }
-                ]
+                ].filter(item => typeof item !== "boolean")
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: file => (
+                    /node_modules/.test(file) &&
+                    !/\.vue\.js/.test(file)
+                ),
                 use: [
                     'thread-loader',
-                    'babel-loader?cacheDirectory=true'
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true
+                        }
+                    }
                 ]
             },
             {
@@ -133,6 +136,7 @@ module.exports = {
                 minifyJS: true,
                 removeScriptTypeAttributes: true
             }
-        })
+        }),
+        new VueLoaderPlugin()
     ]
 };
