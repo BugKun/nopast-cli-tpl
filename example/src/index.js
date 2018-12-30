@@ -9,7 +9,9 @@ import logoIcon from "Images/logo.png";
 @NopastCliTpl({
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    width: "100%",
+    height: "100%"
 })
 class App extends Component {
     constructor(props){
@@ -27,6 +29,7 @@ class App extends Component {
             <div className="main">
                <img src={logoIcon}/>
                <h1>{tips}</h1>
+               <h4>React High Order Component</h4>
             </div>
         )
     }

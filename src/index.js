@@ -1,4 +1,4 @@
-import React, { Component, cloneElement } from "react";
+import React, {Component} from "react";
 
 export default (options) =>
     (WrappedComponent) =>
@@ -14,14 +14,12 @@ export default (options) =>
             render() {
 
                 return (
-                    <WrappedComponent 
-                        {...this.props}
-                        style={{
-                            ...this.props.style,
-                            ...options
-                        }}
-                    />
-                )
+                    <div style={options}>
+                        <WrappedComponent 
+                            {...this.props}
+                        />
 
+                    </div>
+                )
             }
         }
