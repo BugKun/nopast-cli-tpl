@@ -64,12 +64,7 @@ module.exports = {
                 use: [
                     'thread-loader',
                     'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    }
+                    'css-loader'
                 ]
             },
             {
@@ -77,22 +72,12 @@ module.exports = {
                 use: [
                     'thread-loader',
                     'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            outputStyle: 'compressed'
-                        }
-                    }
+                    'css-loader',
+                    'sass-loader'
                 ]
             },
             {
-                test: /\.(png|jpg|gif)$/,
+                test: /\.(png|jpe?g|gif|svg)$/,
                 use: [
                     'thread-loader',
                     'url-loader'

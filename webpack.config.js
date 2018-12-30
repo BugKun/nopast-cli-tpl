@@ -1,5 +1,7 @@
 const path = require('path'),
     threadLoader = require('thread-loader'),
+    MiniCssExtractPlugin = require("mini-css-extract-plugin"),
+    CleanWebpackPlugin = require('clean-webpack-plugin'),
     pkg = require('./package.json');
 
 
@@ -70,8 +72,8 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
+                    MiniCssExtractPlugin.loader,
                     'thread-loader',
-                    'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -83,8 +85,8 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
+                    MiniCssExtractPlugin.loader,
                     'thread-loader',
-                    'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -100,12 +102,25 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpg|gif)$/,
+                test: /\.(png|jpe?g|gif|svg)$/,
                 use: [
                     'thread-loader',
                     'url-loader'
                 ]
             }
         ]
-    }
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+          filename: "[name].css"
+        }),
+        new CleanWebpackPlugin(
+            ["dist"],
+            {
+                root: __dirname,
+                verbose: true,
+                dry: false
+            }
+        )
+    ]
 };

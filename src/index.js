@@ -1,6 +1,8 @@
 import React, {Component} from "react"
 import PropTypes from "prop-types"
 import logoIcon from "Icons/logo.png"
+import "./index.scss"
+
 
 export default class NopastCliTpl extends Component {
     constructor(props) {
@@ -19,7 +21,7 @@ export default class NopastCliTpl extends Component {
         const {text} = this.props;
 
         return (
-            <div style={{textAlign: "center"}}>
+            <div className="nopast-cli-tpl">
                 <img src={logoIcon}/>
                 <h1>{text}</h1>
             </div>
