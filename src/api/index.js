@@ -22,12 +22,11 @@ ajaxinstance
             if(data.msg.text && data.msg.text !== "") {
                 alert(data.msg.text)
             }
-        }
-
-        if(data.msg.isLogin === false) {
-            Cookies.remove('winduser');
-            let curUrl = window.location.pathname + window.location.search;
-            window.location.href = `/login?referer=${encodeURIComponent(curUrl)}`
+            if(data.msg.isLogin === false) {
+                Cookies.remove('winduser');
+                let curUrl = window.location.pathname + window.location.search;
+                window.location.href = `/login?referer=${encodeURIComponent(curUrl)}`
+            }
         }
 
         return data
