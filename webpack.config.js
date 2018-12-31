@@ -1,6 +1,8 @@
 const path = require('path'),
     threadLoader = require('thread-loader'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
+    OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
+    UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     pkg = require('./package.json');
 
@@ -8,7 +10,6 @@ const path = require('path'),
 
 threadLoader.warmup({}, [
     'babel-loader',
-    'style-loader',
     'sass-loader',
     'css-loader',
     'url-loader'
@@ -54,6 +55,15 @@ module.exports = {
             Icons: path.resolve(__dirname, './src/icons'),
         }
     },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true
+            }),
+            new OptimizeCSSAssetsPlugin()
+        ]
+    },
     module: {
         rules: [
             {
@@ -74,12 +84,7 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'thread-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    }
+                    'css-loader'
                 ]
             },
             {
@@ -87,18 +92,8 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'thread-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            outputStyle: 'compressed'
-                        }
-                    }
+                    'css-loader',
+                    'sass-loader'
                 ]
             },
             {
