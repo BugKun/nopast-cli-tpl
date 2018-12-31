@@ -9,7 +9,7 @@ threadLoader.warmup({}, [
   'style-loader',
   'sass-loader',
   'babel-loader',
-  'file-loader'
+  'url-loader'
 ]);
 
 
@@ -51,12 +51,7 @@ module.exports = {
                 use: [
                     "thread-loader",
                     'style-loader', 
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    }
+                    'css-loader'
                 ]
             },
             {
@@ -64,21 +59,21 @@ module.exports = {
                 use: [
                     "thread-loader",
                     'style-loader', 
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    }, 
-                    'sass-loader?outputStyle=compressed'
+                    'css-loader', 
+                    'sass-loader'
                 ]
             },
             {
-                test: /\.jsx|.js|.mjs$/,
+                test: /\.(jsx|js|mjs)$/,
                 exclude: /node_modules/,
                 use: [
                     "thread-loader",
-                    "babel-loader?cacheDirectory=true"
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true
+                        }
+                    }
                 ]
             },
             {

@@ -1,2 +1,2 @@
 # nopast-cli-tpl
-React HOC
+React High Order Component

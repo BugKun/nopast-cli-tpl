@@ -1,5 +1,8 @@
 ﻿const path = require('path'),
-    threadLoader = require('thread-loader');
+    UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
+    CleanWebpackPlugin = require('clean-webpack-plugin'),
+    threadLoader = require('thread-loader'),
+    pkg = require('./package.json');
 
 
 threadLoader.warmup({}, [
@@ -10,7 +13,7 @@ threadLoader.warmup({}, [
 module.exports = {
     mode: "production",
     entry: {
-        'index': path.resolve(__dirname, './src')
+        [pkg.name]: path.resolve(__dirname, './src')
     }, 
     output: {
         path: path.resolve(__dirname, './dist'),
@@ -54,16 +57,39 @@ module.exports = {
             '.js'
         ]
     },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true
+            })
+        ]
+    },
     module: {
         rules: [
             {
-                test: /\.jsx|.js|.mjs$/,
+                test: /\.(jsx|js|mjs)$/,
                 exclude: /node_modules/,
                 use: [
                     "thread-loader",
-                    "babel-loader?cacheDirectory=true"
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true
+                        }
+                    }
                 ]
             }
         ]
-    }
+    },
+    plugins: [
+        new CleanWebpackPlugin(
+            ["dist"],
+            {
+                root: __dirname,
+                verbose: true,
+                dry: false
+            }
+        )
+    ]
 };
