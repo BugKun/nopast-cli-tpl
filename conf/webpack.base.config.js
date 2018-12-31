@@ -1,6 +1,9 @@
 ﻿const path = require('path'),
+    MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     threadLoader = require('thread-loader'),
+    isProd = process.env.NODE_ENV === 'production',
+    isDev = !isProd,
     pkg = require('../package.json');
 
 
@@ -19,7 +22,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, '../static'),
-        filename: 'build/[name].[chunkhash:6].js',
+        filename: 'build/js/[name].[chunkhash:6].js',
         publicPath: '/'
     },
     resolve: {
@@ -35,45 +38,36 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx|.js|.mjs$/,
+                test: /\.(jsx|js|mjs)$/,
                 exclude: /node_modules/,
                 use:[
                     "thread-loader",
-                    "babel-loader?cacheDirectory=true"
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true
+                        }
+                    }
                 ]
             },
             {
                 test: /\.css$/,
                 use: [
+                    (isProd) && MiniCssExtractPlugin.loader,
                     'thread-loader',
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    }
-                ]
+                    (isDev) && 'style-loader',
+                    'css-loader'
+                ].filter(item => typeof item !== "boolean")
             },
             {
                 test: /\.scss$/,
                 use: [
+                    (isProd) && MiniCssExtractPlugin.loader,
                     'thread-loader',
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true,
-                            outputStyle: 'compressed'
-                        }
-                    }
-                ]
+                    (isDev) && 'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ].filter(item => typeof item !== "boolean")
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/,
