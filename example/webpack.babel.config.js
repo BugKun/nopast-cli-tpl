@@ -81,12 +81,7 @@ module.exports = {
                 use: [
                     'thread-loader',
                     'vue-style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    }
+                    'css-loader'
                 ]
             },
             {
@@ -94,18 +89,8 @@ module.exports = {
                 use: [
                     'thread-loader',
                     'vue-style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            outputStyle: 'compressed'
-                        }
-                    }
+                    'css-loader',
+                    'sass-loader'
                 ]
             },
             {

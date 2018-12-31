@@ -2,6 +2,8 @@
     threadLoader = require('thread-loader'),
     VueLoaderPlugin = require('vue-loader/lib/plugin'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
+    OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
+    UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     pkg = require('./package.json');
 
@@ -10,7 +12,6 @@
 threadLoader.warmup({}, [
     'vue-loader',
     'babel-loader',
-    'style-loader',
     'sass-loader',
     'css-loader',
     'url-loader'
@@ -44,6 +45,15 @@ module.exports = {
             Icons: path.resolve(__dirname, './src/icons'),
         }
     },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({
+                cache: true,
+                parallel: true
+            }),
+            new OptimizeCSSAssetsPlugin()
+        ]
+    },
     module: {
         rules: [
             {
@@ -53,9 +63,6 @@ module.exports = {
                     {
                         loader: 'vue-loader',
                         options: {
-                            cssModules: {
-                                minimize: true
-                            },
                             threadMode: true
                         }
                     }
@@ -82,31 +89,16 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'thread-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    }
+                    'css-loader'
                 ]
             },
             {
                 test: /\.scss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            minimize: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            outputStyle: 'compressed'
-                        }
-                    }
+                    'thread-loader',
+                    'css-loader',
+                    'sass-loader'
                 ]
             },
             {
