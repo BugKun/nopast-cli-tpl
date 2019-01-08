@@ -4,7 +4,7 @@
     import NopastCliTpl from 'vue-nopast-cli-tpl';
 
     export default {
-        name: "example",
+        name: "Example",
         components: {
             'nopast-cli-tpl': NopastCliTpl
         },

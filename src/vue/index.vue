@@ -3,7 +3,7 @@
 
 <script>
     export default {
-        name: 'nopast-cli-tpl',
+        name: 'NopastCliTpl',
         props: {
             text: {
                 type: String,
