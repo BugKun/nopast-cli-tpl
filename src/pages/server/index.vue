@@ -5,7 +5,7 @@
     import { mapState, mapMutations } from 'vuex'
 
     export default {
-        name: 'server',
+        name: 'Server',
         computed: {
             ...mapState({
                 serverActive: state => (state.serverActive)? "online" : "offline"
