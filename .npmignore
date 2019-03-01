@@ -5,3 +5,4 @@ npm-debug.log
 *.map
 *.rb
 .gitignore
+package-lock.json
