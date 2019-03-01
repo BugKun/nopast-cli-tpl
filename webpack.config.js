@@ -1,5 +1,5 @@
 ﻿const path = require('path'),
-    UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
+    TerserPlugin = require('terser-webpack-plugin'),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     threadLoader = require('thread-loader'),
     pkg = require('./package.json');
@@ -59,7 +59,7 @@ module.exports = {
     },
     optimization: {
         minimizer: [
-            new UglifyJsPlugin({
+            new TerserPlugin({
                 cache: true,
                 parallel: true
             })

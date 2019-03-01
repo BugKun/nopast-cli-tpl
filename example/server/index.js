@@ -4,6 +4,7 @@
     app = express(),
     compress = require('compression'),
     bodyParser = require('body-parser'),
+    portfinder = require('portfinder'),
     isWin32 = require('os').platform() === 'win32',
     path = require('path');
 
@@ -34,10 +35,6 @@ app.use(compress());
 
 
 
-
-
-
-
 /* 开启history模式 */
 app.use((req, res) => {
     const filename = path.join(compiler.outputPath, 'index.html');
@@ -52,11 +49,19 @@ app.use((req, res) => {
 });
 
 
-
-app.listen(port, () => {
-    console.log(`Server is now running in localhost:${port}`);
-    /* 自动打开浏览器 */
-    if(isWin32) {
-        child_process.exec(`start http://localhost:${port}`);
-    }
-});
+portfinder.basePort = port;
+portfinder.getPortPromise()
+    .then(newPort => {
+        if (port !== newPort) {
+            console.log(`Port ${port} is occupied, open new port ${newPort}`)
+        }
+        app.listen(newPort, () => {
+            console.log(`Server is now running in localhost:${newPort}`);
+            if(isWin32) {
+                /* 自动打开浏览器 */
+                child_process.exec(`start http://localhost:${newPort}`);
+            }
+        });
+    }).catch(error => {
+        console.log('Did not find the free port, please open the task manager to kill the process who use this port and then try again', error)
+    })
