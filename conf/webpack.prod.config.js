@@ -31,8 +31,7 @@ module.exports = {
     plugins: [
         ...webpackBaseConfig.plugins,
         new MiniCssExtractPlugin({
-            filename: 'build/css/[name].[hash:6].css',
-            chunkFilename: 'build/css/[name].[hash:6].css',
+            filename: 'build/css/[name].[contenthash:6].css'
         }),
         new CleanWebpackPlugin(
             ["build", "assets", "index.html"],
