@@ -4,6 +4,7 @@ const express = require('express'),
     proxy = require('http-proxy-middleware'),
     compress = require("compression"),
     path = require('path'),
+    portfinder = require('portfinder'),
     isWin32 = require('os').platform() === 'win32',
     options = require("../options.js"),
     port = process.env.port || 8081;
@@ -50,10 +51,19 @@ app.use((req, res) => {
 });
 
 
-app.listen(port, () => {
-    console.log(`Server is now running in localhost:${port}`);
-    if(isWin32) {
-        //打开浏览器
-        child_process.exec(`start http://localhost:${port}`);
-    }
-});
+portfinder.basePort = port;
+portfinder.getPortPromise()
+    .then(newPort => {
+        if (port !== newPort) {
+            console.log(`Port ${port} is occupied, open new port ${newPort}`)
+        }
+        app.listen(newPort, () => {
+            console.log(`Server is now running in localhost:${newPort}`);
+            if(isWin32) {
+                //打开浏览器
+                child_process.exec(`start http://localhost:${newPort}`);
+            }
+        });
+    }).catch(error => {
+        console.log('Did not find the free port, please open the task manager to kill the process who use this port and then try again', error)
+    })

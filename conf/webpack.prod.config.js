@@ -2,7 +2,7 @@
     webpackBaseConfig = require('./webpack.base.config'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
-    UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
+    TerserPlugin = require('terser-webpack-plugin'),
     CleanWebpackPlugin = require('clean-webpack-plugin');
 
 
@@ -21,7 +21,7 @@ module.exports = {
     optimization: {
         ...webpackBaseConfig.optimization,
         minimizer: [
-            new UglifyJsPlugin({
+            new TerserPlugin({
                 cache: true,
                 parallel: true
             }),
@@ -31,8 +31,7 @@ module.exports = {
     plugins: [
         ...webpackBaseConfig.plugins,
         new MiniCssExtractPlugin({
-            filename: 'build/css/[name].[hash:6].css',
-            chunkFilename: 'build/css/[name].[hash:6].css',
+            filename: 'build/css/[name].[contenthash:6].css'
         }),
         new CleanWebpackPlugin(
             ["build", "assets", "index.html"],
