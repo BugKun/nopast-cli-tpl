@@ -1,7 +1,0 @@
-.git
-.idea
-node_modules
-npm-debug.log
-*.map
-*.rb
-.gitignore

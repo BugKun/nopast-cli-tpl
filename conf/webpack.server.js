@@ -4,6 +4,7 @@
     compress = require("compression"),
     child_process = require('child_process'),
     path = require('path'),
+    portfinder = require('portfinder'),
     options = require("../options.js"),
     isWin32 = require('os').platform() === 'win32',
     port = process.env.PORT || 8081;
@@ -51,10 +52,20 @@ app.use((req, res) => {
 });
 
 
-app.listen(port, () => {
-    console.log(`Server is now running in localhost:${port}`);
-    /* 自动打开浏览器 */
-    if(isWin32) {
-        child_process.exec(`start http://localhost:${port}`);
-    }
-});
+
+portfinder.basePort = port;
+portfinder.getPortPromise()
+    .then(newPort => {
+        if (port !== newPort) {
+            console.log(`Port ${port} is occupied, open new port ${newPort}`)
+        }
+        app.listen(newPort, () => {
+            console.log(`Server is now running in localhost:${newPort}`);
+            if(isWin32) {
+                /* 自动打开浏览器 */
+                child_process.exec(`start http://localhost:${newPort}`);
+            }
+        });
+    }).catch(error => {
+        console.log('Did not find the free port, please open the task manager to kill the process who use this port and then try again', error)
+    })

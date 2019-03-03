@@ -2,7 +2,7 @@
     webpackBaseConfig = require('./webpack.base.config'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
-    UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
+    TerserPlugin = require('terser-webpack-plugin'),
     CleanWebpackPlugin = require('clean-webpack-plugin');
 
 
@@ -21,7 +21,7 @@ module.exports = {
     optimization: {
         ...webpackBaseConfig.optimization,
         minimizer: [
-            new UglifyJsPlugin({
+            new TerserPlugin({
                 cache: true,
                 parallel: true
             }),
