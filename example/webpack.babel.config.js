@@ -17,6 +17,7 @@ module.exports = {
     mode: "development",
     entry: {
         app: [
+            'babel-polyfill',
             path.resolve(__dirname, './src'),
             "webpack-hot-middleware/client?reload=true"
         ]

@@ -1,5 +1,4 @@
-﻿import "babel-polyfill";
-import React, { Component } from 'react';
+﻿import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import NopastCliTpl from "react-nopast-cli-tpl";
 import "./index.less";
