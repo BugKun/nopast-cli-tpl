@@ -18,7 +18,10 @@ threadLoader.warmup({}, [
 
 module.exports = {
     entry: {
-        app: [path.resolve(__dirname, '../src')]
+        app: [
+            'babel-polyfill',
+            path.resolve(__dirname, '../src')
+        ]
     },
     output: {
         path: path.resolve(__dirname, '../static'),
