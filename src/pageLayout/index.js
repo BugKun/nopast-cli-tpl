@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import {inject, observer} from "mobx-react";
-import "./index.scss"
+import "./index.less"
 import logoIcon from "Assets/images/logo.png"
 
 @inject("ServerStore")

@@ -12,7 +12,7 @@ threadLoader.warmup({}, [
     'babel-loader',
     'style-loader',
     'css-loader',
-    'sass-loader',
+    'less-loader',
     'file-loader'
 ]);
 
@@ -60,13 +60,13 @@ module.exports = {
                 ].filter(item => typeof item !== "boolean")
             },
             {
-                test: /\.scss$/,
+                test: /\.less$/,
                 use: [
                     (isProd) && MiniCssExtractPlugin.loader,
                     'thread-loader',
                     (isDev) && 'style-loader',
                     'css-loader',
-                    'sass-loader'
+                    'less-loader'
                 ].filter(item => typeof item !== "boolean")
             },
             {

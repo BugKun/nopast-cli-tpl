@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom';
-import "./index.scss"
+import "./index.less"
 
 
 export default class Index extends Component {

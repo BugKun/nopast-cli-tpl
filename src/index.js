@@ -7,7 +7,7 @@ import Router from './router'
 import stores from './stores'
 import PageLayout from "./pageLayout"
 
-import "./global.scss"
+import "./global.less"
 
 configure({
     enforceActions: 'always'

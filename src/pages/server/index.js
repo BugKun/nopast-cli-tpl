@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {inject, observer} from "mobx-react";
-import "./index.scss"
+import "./index.less"
 
 @inject("ServerStore")
 @observer
