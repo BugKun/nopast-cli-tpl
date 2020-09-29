@@ -1,6 +1,6 @@
 ﻿const path = require('path'),
     TerserPlugin = require('terser-webpack-plugin'),
-    CleanWebpackPlugin = require('clean-webpack-plugin'),
+    {CleanWebpackPlugin} = require('clean-webpack-plugin'),
     threadLoader = require('thread-loader'),
     pkg = require('./package.json');
 
@@ -14,7 +14,7 @@ module.exports = {
     mode: "production",
     entry: {
         [pkg.name]: path.resolve(__dirname, './src')
-    }, 
+    },
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: '[name].js',
@@ -44,7 +44,7 @@ module.exports = {
     },
     resolve: {
         modules: [
-            path.resolve(__dirname, './src'), 
+            path.resolve(__dirname, './src'),
             'node_modules'
         ],
         alias: {
@@ -83,13 +83,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin(
-            ["dist"],
-            {
-                root: __dirname,
-                verbose: true,
-                dry: false
-            }
-        )
+        new CleanWebpackPlugin()
     ]
 };

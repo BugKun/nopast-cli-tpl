@@ -7,7 +7,7 @@
 
 threadLoader.warmup({}, [
   'style-loader',
-  'sass-loader',
+  'less-loader',
   'babel-loader',
   'url-loader'
 ]);
@@ -17,18 +17,18 @@ module.exports = {
     mode: "development",
     entry: {
         app: [
-            path.resolve(__dirname, './src'), 
+            path.resolve(__dirname, './src'),
             "webpack-hot-middleware/client?reload=true"
         ]
     },
     output: {
         path: path.resolve(__dirname, '../static'),
         filename: 'build/[name].[hash:6].js',
-        publicPath: '/' 
+        publicPath: '/'
     },
     resolve: {
         modules: [
-            path.resolve(__dirname, './src'), 
+            path.resolve(__dirname, './src'),
             'node_modules'
         ],
         alias: {
@@ -50,17 +50,17 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     "thread-loader",
-                    'style-loader', 
+                    'style-loader',
                     'css-loader'
                 ]
             },
             {
-                test: /\.scss$/,
+                test: /\.less$/,
                 use: [
                     "thread-loader",
-                    'style-loader', 
-                    'css-loader', 
-                    'sass-loader'
+                    'style-loader',
+                    'css-loader',
+                    'less-loader'
                 ]
             },
             {

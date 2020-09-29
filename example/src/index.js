@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import NopastCliTpl from "react-nopast-cli-tpl";
-import "./index.scss";
+import "./index.less";
 import logoIcon from "Images/logo.png";
 
 
