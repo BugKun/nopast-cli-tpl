@@ -11,7 +11,7 @@ threadLoader.warmup({}, [
     'vue-loader',
     'babel-loader',
     'vue-style-loader',
-    'sass-loader',
+    'less-loader',
     'css-loader',
     'url-loader'
 ]);
@@ -21,6 +21,7 @@ module.exports = {
     mode: 'development',
     entry: {
         [pkg.name]: [
+            'babel-polyfill',
             path.resolve(__dirname, './src/index.js'),
             'webpack-hot-middleware/client?reload=true'
         ]
@@ -85,12 +86,12 @@ module.exports = {
                 ]
             },
             {
-                test: /\.scss$/,
+                test: /\.less$/,
                 use: [
                     'thread-loader',
                     'vue-style-loader',
                     'css-loader',
-                    'sass-loader'
+                    'less-loader'
                 ]
             },
             {

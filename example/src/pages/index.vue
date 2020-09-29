@@ -1,5 +1,3 @@
-<template src="./template.html" />
-<style src="./index.css" />
 <script>
     import NopastCliTpl from 'vue-nopast-cli-tpl';
 
@@ -10,15 +8,18 @@
         },
         data() {
             return {
-                
+
             }
         },
         mounted() {
-            
+
         },
         methods: {
-          
+
         }
     }
 </script>
 
+
+<template src="./template.html" />
+<style scoped lang="less" src="./index.less" />
