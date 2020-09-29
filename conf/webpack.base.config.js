@@ -66,7 +66,13 @@ module.exports = {
                     'thread-loader',
                     (isDev) && 'style-loader',
                     'css-loader',
-                    'less-loader'
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            sourceMap: isDev,
+                            paths: [] // 黑魔法，保证thread-loader能正常运行
+                        }
+                    },
                 ].filter(item => typeof item !== "boolean")
             },
             {
