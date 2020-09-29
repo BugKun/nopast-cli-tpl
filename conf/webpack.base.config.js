@@ -13,6 +13,7 @@ threadLoader.warmup({}, [
     'vue-style-loader',
     'less-loader',
     'css-loader',
+    'postcss-loader',
     'file-loader'
 ]);
 
@@ -62,7 +63,8 @@ module.exports = {
                     (isProd) && MiniCssExtractPlugin.loader,
                     'thread-loader',
                     (isDev) && 'vue-style-loader',
-                    'css-loader'
+                    'css-loader',
+                    'postcss-loader',
                 ].filter(item => typeof item !== "boolean")
             },
             {
@@ -72,6 +74,7 @@ module.exports = {
                     'thread-loader',
                     (isDev) && 'vue-style-loader',
                     'css-loader',
+                    'postcss-loader',
                     {
                         loader: 'less-loader',
                         options: {
