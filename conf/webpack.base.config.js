@@ -1,5 +1,4 @@
-﻿const webpack = require('webpack'),
-    path = require('path'),
+﻿const path = require('path'),
     VueLoaderPlugin = require('vue-loader/lib/plugin'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
@@ -8,32 +7,31 @@
     isDev = !isProd,
     pkg = require('../package.json');
 
-    console.log([MiniCssExtractPlugin.loader]);
-
 threadLoader.warmup({}, [
     'vue-loader',
     'babel-loader',
     'vue-style-loader',
-    'sass-loader',
+    'less-loader',
     'css-loader',
     'file-loader'
 ]);
-      
+
 
 module.exports = {
     entry: {
         app: [
+            'babel-polyfill',
             path.resolve(__dirname, '../src/mainScript.js')
         ]
-    }, 
+    },
     output: {
-        path: path.resolve(__dirname, '../static'), 
-        filename: 'build/js/[name].[chunkhash:6].js', 
+        path: path.resolve(__dirname, '../static'),
+        filename: 'build/js/[name].[chunkhash:6].js',
         publicPath: '/'
     },
     resolve: {
         modules: [
-            path.resolve(__dirname, '../src'), 
+            path.resolve(__dirname, '../src'),
             'node_modules'
         ],
         alias: {
@@ -68,16 +66,17 @@ module.exports = {
                 ].filter(item => typeof item !== "boolean")
             },
             {
-                test: /\.scss$/,
+                test: /\.less$/,
                 use: [
                     (isProd) && MiniCssExtractPlugin.loader,
                     'thread-loader',
                     (isDev) && 'vue-style-loader',
                     'css-loader',
                     {
-                        loader: 'sass-loader',
+                        loader: 'less-loader',
                         options: {
-                            sourceMap: isDev
+                            sourceMap: isDev,
+                            paths: [] // 黑魔法，保证thread-loader能正常运行
                         }
                     }
                 ].filter(item => typeof item !== "boolean")

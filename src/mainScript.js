@@ -1,11 +1,8 @@
-﻿import Vue from 'vue/dist/vue'
+﻿import Vue from 'vue'
 import store from "./store"
 import router from "./router"
-import "./global.scss"
+import "./global.less"
 import App from './pageLayout'
-
-
-Vue.config.productionTip = false;
 
 
 new Vue({

@@ -9,7 +9,10 @@
         "parser": "babel-eslint",
         "sourceType": "module"
     },
-    "extends": ["plugin:vue/recommended", "eslint:recommended"],
+    "extends": [
+        "plugin:vue/recommended",
+        "eslint:recommended"
+    ],
     "rules": {
         "vue/order-in-components": "off",
         "comma-dangle": "off",

@@ -1,6 +1,3 @@
-<template src="./template.html" />
-<style scoped lang="scss" src="./style.scss"/>
-
 <script>
     import { mapState, mapMutations } from 'vuex'
 
@@ -14,3 +11,5 @@
     }
 </script>
 
+<template src="./template.html" />
+<style scoped lang="less" src="./style.less"/>
