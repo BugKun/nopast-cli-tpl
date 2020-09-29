@@ -9,7 +9,7 @@ const webpack = require('webpack'),
 threadLoader.warmup({}, [
     'babel-loader',
     'style-loader',
-    'sass-loader',
+    'less-loader',
     'css-loader',
     'url-loader'
 ]);
@@ -19,6 +19,7 @@ module.exports = {
     mode: 'development',
     entry: {
         [pkg.name]: [
+            'babel-polyfill',
             path.resolve(__dirname, './src/index.js'),
             'webpack-hot-middleware/client?reload=true'
         ]
@@ -68,12 +69,17 @@ module.exports = {
                 ]
             },
             {
-                test: /\.scss$/,
+                test: /\.less$/,
                 use: [
                     'thread-loader',
                     'style-loader',
                     'css-loader',
-                    'sass-loader'
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
                 ]
             },
             {

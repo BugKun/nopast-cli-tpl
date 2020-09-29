@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import PropTypes from "prop-types"
 import logoIcon from "Icons/logo.png"
-import "./index.scss"
+import "./index.less"
 
 
 export default class NopastCliTpl extends Component {
@@ -27,5 +27,5 @@ export default class NopastCliTpl extends Component {
             </div>
         )
     }
-    
+
 }

@@ -3,14 +3,14 @@ const path = require('path'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
     TerserPlugin = require('terser-webpack-plugin'),
-    CleanWebpackPlugin = require('clean-webpack-plugin'),
+    {CleanWebpackPlugin} = require('clean-webpack-plugin'),
     pkg = require('./package.json');
 
 
 
 threadLoader.warmup({}, [
     'babel-loader',
-    'sass-loader',
+    'less-loader',
     'css-loader',
     'url-loader'
 ]);
@@ -88,12 +88,18 @@ module.exports = {
                 ]
             },
             {
-                test: /\.scss$/,
+                test: /\.less$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'thread-loader',
                     'css-loader',
-                    'sass-loader'
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            sourceMap: false,
+                            paths: [] // 黑魔法，保证thread-loader能正常运行
+                        }
+                    }
                 ]
             },
             {
@@ -109,13 +115,6 @@ module.exports = {
         new MiniCssExtractPlugin({
           filename: "[name].css"
         }),
-        new CleanWebpackPlugin(
-            ["dist"],
-            {
-                root: __dirname,
-                verbose: true,
-                dry: false
-            }
-        )
+        new CleanWebpackPlugin()
     ]
 };

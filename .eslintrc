@@ -1,4 +1,5 @@
 {
+    "root": true,
     "parser": "babel-eslint",
     "plugins": [
         "react"
@@ -12,7 +13,8 @@
         "ecmaVersion": 2018,
         "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "legacyDecotators": true
         }
     },
     "settings": {
@@ -25,24 +27,55 @@
         "plugin:react/recommended"
     ],
     "rules": {
-        "comma-dangle": "off",
-        "global-require": "off",
-        "import/no-extraneous-dependencies": "off",
-        "import/no-unresolved": "off",
-        "import/extensions": "off",
-        "react/jsx-filename-extension": "off",
-        "react/prefer-stateless-function": [
-            "error",
+        "comma-dangle": "off", // 要求或禁止使用拖尾逗号
+        "global-require": "off", // 强制在模块顶部调用
+        "no-alert": "off", // 禁止alert
+        "no-bitwise": "off", // 位运算
+        "react/prop-types": "off", // react中没有在prop-types定义传入参数的类型  off(comp 2)
+        "react/jsx-key": "off", // react中的jsx缺少key，导致运行效率下降
+        "no-extra-semi": "off", // 代码结束的分号
+        "no-case-declarations": "off", // switch case 里不能定义变量
+        "react/jsx-filename-extension": "off", // 文件扩展名必须是jsx
+
+        "no-unused-vars": "warn", // 定义了变量但没使用的
+        "react/display-name": "warn", // react中的class没有命名，这回导致调试代码时因没有名称标识，加重调试难度
+        "no-fallthrough": "warn", // switch没有break，影响效率
+        "no-mixed-spaces-and-tabs": "warn", // 一个缩进用多个空格代理
+        "no-constant-condition": "warn", // 使用常量表达式 https://cn.eslint.org/docs/rules/no-constant-condition 
+        "react/no-array-index-key": "warn", // It's a bad idea to use the array index since it doesn't uniquely identify your elements.
+       
+        /*
+        * 已默认开启
+        *
+        */
+        "no-unreachable": "error", // 无法被调用的逻辑
+        "no-redeclare": "error", // 变量重复定义
+        "no-prototype-builtins": "error", // Do not access Object.prototype method 'hasOwnProperty' from target object  危险
+        "react/no-string-refs": "error", // 使用即将废弃的ref string
+        "no-empty-pattern": "error", // const {} = test on
+        "no-undef": "error", // 没有定义的变量
+        "no-dupe-keys": "error", // 对象的值重复定义
+        "no-empty": "error", // 代码块逻辑空缺
+        "no-useless-escape": "error", // 无意义的转义
+        "react/jsx-no-target-blank": "error", // 危险 https://www.jianshu.com/p/b89dc1af1f07
+        "react/jsx-no-duplicate-props": "error", // No duplicate props allowed
+        /* END */
+        "react/prefer-stateless-function": [ 
+            "warn", // Stateless functional components are simpler than class based components and will benefit from future React performance optimizations specific to these components.
             {
                 "ignorePureComponents": true
             }
         ],
-        "react/jsx-tag-spacing": "off",
-        "react/forbid-prop-types": "off",
-        "react/no-array-index-key": "off",
-        "jsx-a11y/no-static-element-interactions": "off",
-        "no-alert": "off",
-        "no-bitwise": "off"
+        "react/jsx-tag-spacing": "off"
+        // "react/jsx-tag-spacing": [
+        //     "error", // This rule checks the whitespace inside and surrounding the JSX syntactic elements.
+        //     {
+        //         "closingSlash": "never",
+        //         "beforeSelfClosing": "always",
+        //         "afterOpening": "never",
+        //         "beforeClosing": "allow"
+        //     }
+        // ]
     },
     "globals": {
         "jQuery": false,
