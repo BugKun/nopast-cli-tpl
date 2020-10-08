@@ -6,7 +6,7 @@ import "./index.less"
 
 @inject("ServerStore")
 @observer
-export default class Server extends Component {
+class Server extends Component {
     constructor(props){
         super(props);
 
@@ -33,5 +33,4 @@ export default class Server extends Component {
     }
 }
 
-
-
+export default Server

@@ -5,7 +5,7 @@ import {Provider} from 'mobx-react'
 import Router from './router'
 import stores from './stores'
 import PageLayout from "./pageLayout"
-
+import "normalize.css"
 import "./global.less"
 
 configure({
