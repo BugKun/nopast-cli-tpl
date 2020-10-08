@@ -14,16 +14,30 @@
         "eslint:recommended"
     ],
     "rules": {
-        "vue/order-in-components": "off",
-        "comma-dangle": "off",
-        "global-require": "off",
-        "import/no-extraneous-dependencies": "off",
-        "import/no-unresolved": "off",
-        "import/extensions": "off",
-        "no-alert": "off",
-        "no-console": "off",
-        "no-bitwise": "off",
-        "no-unused-vars": "warn"
+        "comma-dangle": "off", // 要求或禁止使用拖尾逗号
+        "global-require": "off", // 强制在模块顶部调用
+        "no-alert": "off", // 禁止alert
+        "no-console": "off", // 禁止console
+        "no-bitwise": "off", // 位运算
+        "no-unused-vars": "warn", // 定义了变量但没使用的
+        "no-extra-semi": "off", // 代码结束的分号
+        "no-case-declarations": "off", // switch case 里不能定义变量
+        "no-fallthrough": "warn", // switch没有break，影响效率
+        "no-mixed-spaces-and-tabs": "warn", // 一个缩进用多个空格代理
+        "no-constant-condition": "warn", // 使用常量表达式 https://cn.eslint.org/docs/rules/no-constant-condition 
+        
+        /*
+        * 已默认开启
+        *
+        */
+        "no-unreachable": "error", // 无法被调用的逻辑
+        "no-redeclare": "error", // 变量重复定义
+        "no-prototype-builtins": "error", // Do not access Object.prototype method 'hasOwnProperty' from target object  危险
+        "no-empty-pattern": "error", // const {} = test on
+        "no-undef": "error", // 没有定义的变量
+        "no-dupe-keys": "error", // 对象的值重复定义
+        "no-empty": "error", // 代码块逻辑空缺
+        "no-useless-escape": "warn" // 无意义的转义
     },
     "globals": {
         "jQuery": false,

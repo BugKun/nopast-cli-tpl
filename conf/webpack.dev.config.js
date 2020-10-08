@@ -17,12 +17,7 @@ module.exports = {
         ...webpackBaseConfig.output,
         filename: '[name].[hash:8].js'
     },
-    resolve: {
-        ...webpackBaseConfig.resolve,
-        alias: {
-            ...webpackBaseConfig.resolve.alias,
-        }
-    },
+    resolve: webpackBaseConfig.resolve,
     devtool: "source-map",
     module: webpackBaseConfig.module,
     optimization: webpackBaseConfig.optimization,

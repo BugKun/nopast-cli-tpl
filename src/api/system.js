@@ -1,4 +1,4 @@
-const apiCreate = (ajaxinstance) => ({
+export default (ajaxinstance) => ({
     getServer() {
         return ajaxinstance({
             method: 'GET',
@@ -15,6 +15,3 @@ const apiCreate = (ajaxinstance) => ({
         })
     },
 })
-
-export default apiCreate
-
