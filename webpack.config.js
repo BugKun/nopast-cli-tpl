@@ -13,6 +13,7 @@ threadLoader.warmup({}, [
     'vue-loader',
     'babel-loader',
     'less-loader',
+    'postcss-loader',
     'css-loader',
     'url-loader'
 ]);
@@ -98,6 +99,7 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     'thread-loader',
                     'css-loader',
+                    'postcss-loader',
                     {
                         loader: 'less-loader',
                         options: {

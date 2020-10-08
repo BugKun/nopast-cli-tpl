@@ -12,6 +12,7 @@ threadLoader.warmup({}, [
     'babel-loader',
     'vue-style-loader',
     'less-loader',
+    'postcss-loader',
     'css-loader',
     'url-loader'
 ]);
@@ -91,6 +92,7 @@ module.exports = {
                     'thread-loader',
                     'vue-style-loader',
                     'css-loader',
+                    'postcss-loader',
                     'less-loader'
                 ]
             },
