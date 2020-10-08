@@ -24,6 +24,7 @@
         "nopast-cli-tpl"
     ],
     "devDependencies": {
+        "autoprefixer": "^10.0.1",
         "babel-core": "^6.26.0",
         "babel-eslint": "^10.0.1",
         "babel-loader": "^7.1.5",
@@ -46,6 +47,9 @@
         "node-sass": "^4.11.0",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
         "portfinder": "^1.0.20",
+        "postcss-loader": "^4.0.3",
+        "postcss-px-to-viewport": "^1.1.1",
+        "postcss-write-svg": "^3.0.1",
         "sass-loader": "^7.1.0",
         "terser-webpack-plugin": "^1.2.3",
         "thread-loader": "^1.2.0",
