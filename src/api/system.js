@@ -1,17 +1,20 @@
-import axios from 'axios'
-
-const apiCreate = (ajaxinstance) => {
-    const api = {}
-
-    api.getServer = () => {
+const apiCreate = (ajaxinstance) => ({
+    getServer() {
         return ajaxinstance({
             method: 'GET',
-            url: `/api/server`
+            url: `/server`,
         })
-    }
-
-    return api
-}
+    },
+    generateJSON() {
+        return ajaxinstance({
+            method: 'POST',
+            url: `/generateJSON`,
+            ignoreCommonErrorHandler(code) {
+                return code == 871
+            }
+        })
+    },
+})
 
 export default apiCreate
 

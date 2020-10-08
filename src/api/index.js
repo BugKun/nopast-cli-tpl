@@ -1,12 +1,12 @@
 import axios from 'axios'
-import Cookies from 'js-cookie'
+import { Message } from 'Utils'
+import { requestBaseURL, requestTimeout, remapperErrorTips } from 'Constant'
 import system from './system'
-import { baseURL } from "Config"
 
 // 实例化 ajax请求对象
 const ajaxinstance = axios.create({
-  baseURL,
-  timeout: 10000
+    baseURL: requestBaseURL,
+    timeout: requestTimeout
 })
 
 // 请求响应拦截器
@@ -16,22 +16,26 @@ ajaxinstance
     .use((response) => {
         // TODO
 
-        let { data } = response;
+        let { data, config } = response
 
-        if(!data.success){
-            if(data.msg.text && data.msg.text !== "") {
-                alert(data.msg.text)
-            }
-            if(data.msg.isLogin === false) {
-                Cookies.remove('winduser');
-                let curUrl = window.location.pathname + window.location.search;
-                window.location.href = `/login?referer=${encodeURIComponent(curUrl)}`
+        if (data.code != 1) {
+            if (!config.ignoreCommonErrorHandler || !config.ignoreCommonErrorHandler(data.code)) {
+                if (remapperErrorTips[data.code]) {
+                    Message.alert(remapperErrorTips[data.code])
+                } else if (data.msg) {
+                    Message.alert(data.msg)
+                } else {
+                    Message.alert('网络数据异常，请稍后再试')
+                }
             }
         }
 
         return data
     }, (error) => {
-        return Promise.reject(error)
+        if (error instanceof Error) {
+            Message.alert('请求超时，请刷新页面后重试')
+            return Promise.reject(error)
+        }
     })
 
 
@@ -41,11 +45,7 @@ ajaxinstance
     .request
     .use((config) => {
         // TODO
-        let tp = Cookies.get('winduser')
 
-        if (tp) {
-            config['headers']['winduser'] = tp
-        }
         return config
     }, (error) => {
         Promise.reject(error)
@@ -57,6 +57,7 @@ ajaxinstance
  * @type {Object}
  */
 const API = {
-  ...system(ajaxinstance),
+    ...system(ajaxinstance),
 }
+
 export default API

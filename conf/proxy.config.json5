@@ -1,0 +1,10 @@
+[
+    /* Mock server 代理 */
+    [
+        "/api",
+        { 
+            "target": "http://localhost:{mockServerPort}",
+            changeOrigin: true
+        }
+    ]
+]

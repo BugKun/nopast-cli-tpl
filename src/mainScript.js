@@ -1,9 +1,13 @@
 ﻿import Vue from 'vue'
 import store from "./store"
+import Fragment from 'vue-fragment'
 import router from "./router"
+import "normalize.css"
 import "./global.less"
 import App from './pageLayout'
 
+
+Vue.use(Fragment.Plugin)
 
 new Vue({
     el: "#app",

@@ -1,8 +1,6 @@
 <script>
-    import { mapState, mapMutations } from 'vuex'
-
     export default {
-        name: 'App',
+        name: 'Loading'
     }
 </script>
 

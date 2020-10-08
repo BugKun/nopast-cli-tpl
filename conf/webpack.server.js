@@ -3,10 +3,13 @@ const express = require('express'),
     app = express(),
     proxy = require('http-proxy-middleware'),
     compress = require("compression"),
+    fs = require('fs'),
     path = require('path'),
+    JSON5 = require('json5'),
     portfinder = require('portfinder'),
     isWin32 = require('os').platform() === 'win32',
     options = require("../options.js"),
+    proxyConfigJsonPath = path.resolve('conf/proxy.config.json5')
     port = process.env.port || 8081;
 
 
@@ -32,10 +35,47 @@ app.use(compress());
 /* 阻止窥探服务器构造 */
 app.disable("x-powered-by");
 /* 挂载静态页面 */
-app.use(express.static(path.join(__dirname, '../static')));
+app.use(express.static(compiler.outputPath));
 
 /* 代理API接口 */
-app.use("/api/*", proxy({ target: `http://localhost:${options.devPort}`, changeOrigin: false }));
+let proxyList = []
+
+function parseProxyConfig() {
+    try {
+        const proxyListOpt = JSON5.parse(
+            String(
+                fs
+                .readFileSync(proxyConfigJsonPath)
+            )
+            .replace(/{mockServerPort}/g, options.devPort)
+        )
+        proxyList = proxyListOpt.map(([path, opt]) => {
+            return [
+                path,
+                proxy(path, opt)
+            ]
+        })
+    } catch(e) {
+        console.log(e)
+    }
+}
+parseProxyConfig()
+
+fs.watch(proxyConfigJsonPath, (eventType) => {
+    console.log('proxy config => ' + eventType)
+    if(eventType === 'change') {
+        parseProxyConfig()
+    }
+})
+
+app.use('*', (req, res, next) => {
+    for(const [path, proxyInstance] of proxyList) {
+        if(req.baseUrl.match(path)) {
+            return proxyInstance(req, res, next)
+        }
+    }
+    next()
+})
 
 /* 开启history模式 */
 app.use((req, res) => {

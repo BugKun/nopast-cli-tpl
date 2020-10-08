@@ -8,7 +8,8 @@ module.exports = {
     entry: {
         ...webpackBaseConfig.entry,
         app: [
-            ...webpackBaseConfig.entry.app, 
+            path.resolve(__dirname, '../src/helper/index.js'),
+            ...webpackBaseConfig.entry.app,
             "webpack-hot-middleware/client?reload=true"
         ]
     },
@@ -20,7 +21,6 @@ module.exports = {
         ...webpackBaseConfig.resolve,
         alias: {
             ...webpackBaseConfig.resolve.alias,
-            Config: path.resolve(__dirname, "../config/dev")
         }
     },
     devtool: "source-map",

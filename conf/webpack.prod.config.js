@@ -3,7 +3,7 @@
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
     TerserPlugin = require('terser-webpack-plugin'),
-    CleanWebpackPlugin = require('clean-webpack-plugin');
+    {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 
 module.exports = {
@@ -33,14 +33,6 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'build/css/[name].[contenthash:6].css'
         }),
-        new CleanWebpackPlugin(
-            ["build", "assets", "index.html"],
-            {
-                root: path.resolve(__dirname, '../static/'),
-                exclude: ['robots.txt'],
-                verbose: true,
-                dry: false
-            }
-        )
+        new CleanWebpackPlugin(),
     ]
 };

@@ -1,6 +1,8 @@
-﻿const path = require('path'),
+﻿const webpack = require('webpack'),
+    path = require('path'),
     VueLoaderPlugin = require('vue-loader/lib/plugin'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
+    CopyWebpackPlugin = require('copy-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     threadLoader = require('thread-loader'),
     isProd = process.env.NODE_ENV === 'production',
@@ -26,11 +28,12 @@ module.exports = {
         ]
     },
     output: {
-        path: path.resolve(__dirname, '../static'),
+        path: path.resolve(__dirname, '../dist'),
         filename: 'build/js/[name].[chunkhash:6].js',
         publicPath: '/'
     },
     resolve: {
+        extensions: ['.js', '.vue', '.less', '.css'], //后缀名自动补全
         modules: [
             path.resolve(__dirname, '../src'),
             'node_modules'
@@ -40,7 +43,9 @@ module.exports = {
             Utils: path.resolve(__dirname, '../src/utils'),
             Assets: path.resolve(__dirname, '../src/assets'),
             API: path.resolve(__dirname, '../src/api'),
-            Components: path.resolve(__dirname, '../src/components')
+            Components: path.resolve(__dirname, '../src/components'),
+            Mixins: path.resolve(__dirname, '../src/mixins'),
+            Constant: path.resolve(__dirname, '../src/constant'),
         }
     },
     module: {
@@ -101,7 +106,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/,
+                test: /\.(png|jpe?g|gif|svg|woff)$/,
                 use: [
                     {
                         loader: 'file-loader',
@@ -115,6 +120,9 @@ module.exports = {
         ]
     },
     optimization: {
+        runtimeChunk: {
+            name: "manifest"
+        },
         splitChunks: {
             cacheGroups: {
                 vendor: {
@@ -128,6 +136,9 @@ module.exports = {
         }
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../src/index.html'),
             title: `${pkg.name} demo`,
@@ -139,6 +150,9 @@ module.exports = {
                 removeScriptTypeAttributes: true
             }
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new CopyWebpackPlugin([
+            { from: path.resolve(__dirname, '../static'), to: path.resolve(__dirname, '../dist') }
+        ]),
     ]
 };

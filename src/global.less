@@ -1,7 +1,29 @@
 html, body, #app{
     height: 100%;
     margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif !important;
 }
+
+/* 解决IphoneX的安全区域问题 */
+body{
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+
+    padding-left: constant(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left);
+
+    padding-right: constant(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right);
+
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+/* 解决IphoneX的安全边距问题 end */
+
+* {
+    box-sizing: border-box;
+}
+
 *::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -15,4 +37,18 @@ html, body, #app{
 
 *::-webkit-scrollbar-button {
     display: none
+}
+
+// 淡入淡出动画
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
