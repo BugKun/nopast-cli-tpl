@@ -30,6 +30,7 @@
         "comma-dangle": "off", // 要求或禁止使用拖尾逗号
         "global-require": "off", // 强制在模块顶部调用
         "no-alert": "off", // 禁止alert
+        "no-console": "off", // 禁止console
         "no-bitwise": "off", // 位运算
         "react/prop-types": "off", // react中没有在prop-types定义传入参数的类型  off(comp 2)
         "react/jsx-key": "off", // react中的jsx缺少key，导致运行效率下降
@@ -43,7 +44,7 @@
         "no-mixed-spaces-and-tabs": "warn", // 一个缩进用多个空格代理
         "no-constant-condition": "warn", // 使用常量表达式 https://cn.eslint.org/docs/rules/no-constant-condition 
         "react/no-array-index-key": "warn", // It's a bad idea to use the array index since it doesn't uniquely identify your elements.
-       
+
         /*
         * 已默认开启
         *

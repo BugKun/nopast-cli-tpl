@@ -19,6 +19,26 @@
         "syntax-dynamic-import",
         "transform-object-rest-spread",
         "transform-export-extensions",
-        "transform-class-properties"
+        "transform-class-properties",
+        [
+            "transform-imports",
+            {
+                "Utils": {
+                    "transform": "Utils/${member}",
+                    "preventFullImport": true,
+                    "kebabCase": true
+                },
+                "Mixins": {
+                    "transform": "Mixins/${member}",
+                    "preventFullImport": true,
+                    "kebabCase": true
+                },
+                "Components": {
+                    "transform": "Components/${member}",
+                    "preventFullImport": true,
+                    "kebabCase": true
+                }
+            }
+        ]
     ]
 }

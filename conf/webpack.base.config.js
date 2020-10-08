@@ -1,5 +1,7 @@
-﻿const path = require('path'),
+﻿const webpack = require('webpack'), 
+    path = require('path'),
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
+    CopyWebpackPlugin = require('copy-webpack-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     threadLoader = require('thread-loader'),
     isProd = process.env.NODE_ENV === 'production',
@@ -13,6 +15,7 @@ threadLoader.warmup({}, [
     'style-loader',
     'css-loader',
     'less-loader',
+    'postcss-loader',
     'file-loader'
 ]);
 
@@ -24,7 +27,7 @@ module.exports = {
         ]
     },
     output: {
-        path: path.resolve(__dirname, '../static'),
+        path: path.resolve(__dirname, '../dist'),
         filename: 'build/js/[name].[chunkhash:6].js',
         publicPath: '/'
     },
@@ -69,6 +72,7 @@ module.exports = {
                     'thread-loader',
                     (isDev) && 'style-loader',
                     'css-loader',
+                    'postcss-loader',
                     {
                         loader: 'less-loader',
                         options: {
@@ -106,6 +110,9 @@ module.exports = {
         }
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "../src/index.html"),
             title: `${pkg.name} demo`,
@@ -116,6 +123,9 @@ module.exports = {
                 minifyJS: true,
                 removeScriptTypeAttributes: true
             }
-        })
+        }),
+        new CopyWebpackPlugin([
+            { from: path.resolve(__dirname, '../static'), to: path.resolve(__dirname, '../dist') }
+        ]),
     ]
 };

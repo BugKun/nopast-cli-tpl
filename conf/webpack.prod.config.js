@@ -3,20 +3,14 @@
     MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
     TerserPlugin = require('terser-webpack-plugin'),
-    CleanWebpackPlugin = require('clean-webpack-plugin');
+    {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 
 module.exports = {
     mode: "production",
     entry: webpackBaseConfig.entry,
     output: webpackBaseConfig.output,
-    resolve: {
-        ...webpackBaseConfig.resolve,
-        alias: {
-            ...webpackBaseConfig.resolve.alias,
-            Config: path.resolve(__dirname, "../config/prod")
-        }
-    },
+    resolve: webpackBaseConfig.resolve,
     module: webpackBaseConfig.module,
     optimization: {
         ...webpackBaseConfig.optimization,
@@ -34,14 +28,6 @@ module.exports = {
             filename: 'build/css/[name].[hash:6].css',
             chunkFilename: 'build/css/[name].[hash:6].css',
         }),
-        new CleanWebpackPlugin(
-            ["build", "assets", "index.html"],
-            {
-                root: path.resolve(__dirname, '../static/'),
-                exclude: ['robots.txt'],
-                verbose: true,
-                dry: false
-            }
-        )
+        new CleanWebpackPlugin()
     ]
 };
