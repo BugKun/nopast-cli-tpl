@@ -1,6 +1,3 @@
-<template src="./template.html" />
-<style lang="scss" scoped src="./style.scss" />
-
 <script>
     export default {
         name: 'NopastCliTpl',
@@ -12,3 +9,7 @@
         }
     };
 </script>
+
+
+<template src="./template.html" />
+<style lang="less" scoped src="./style.less" />
