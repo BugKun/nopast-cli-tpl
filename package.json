@@ -31,7 +31,7 @@
         "nodemon": "^2.0.4"
     },
     "devDependencies": {
-        "autoprefixer": "^10.0.1",
+        "autoprefixer": "^9.6.1",
         "axios": "0.18.0",
         "babel-core": "^6.26.3",
         "babel-eslint": "^10.0.1",
@@ -69,7 +69,7 @@
         "normalize.css": "^8.0.1",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
         "portfinder": "^1.0.20",
-        "postcss-loader": "^4.0.3",
+        "postcss-loader": "^3.0.0",
         "postcss-px-to-viewport": "^1.1.1",
         "postcss-write-svg": "^3.0.1",
         "prop-types": "^15.6.2",
